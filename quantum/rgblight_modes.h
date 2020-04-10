@@ -54,9 +54,9 @@ _RGBM_SINGLE_DYNAMIC(RGB_TEST)
 _RGBM_SINGLE_DYNAMIC(ALTERNATING)
 #    endif
 ////  Add a new mode here.
-// #ifdef RGBLIGHT_EFFECT_<name>
-//    _RGBM_<SINGLE|MULTI>_<STATIC|DYNAMIC>( <name> )
-// #endif
+#    ifdef RGBLIGHT_EFFECT_K1976
+_RGBM_MULTI_DYNAMIC(K1976)
+#    endif
 #endif
 
 #undef _RGBM_SINGLE_STATIC
