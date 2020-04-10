@@ -18,7 +18,7 @@ void led_init_ports(void) {
   // Set caps lock LED pin as output
   DDRB |= (1 << 2);
   // Default to off
-  PORTB |= (1 << 2);
+   PORTB |= (1 << 2);
 }
 
 void led_set_kb(uint8_t usb_led) {
