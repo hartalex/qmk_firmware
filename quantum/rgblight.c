@@ -1170,20 +1170,15 @@ void rgblight_effect_alternating(animation_status_t *anim) {
 
 #ifdef RGBLIGHT_EFFECT_K1976
 void rgblight_effect_k1976(animation_status_t *anim) {
+    int group = effect_num_leds / 2 / 8;
     for (int i = 0; i < effect_num_leds; i++) {
         LED_TYPE *ledp = led + i + effect_start_pos;
 
-        if (i == 0 || i == 1) {
+        if (i < (group * 2) || i >= effect_num_leds - group) {
             sethsv(HSV_GREEN, ledp);
-        } else if (i == 2) {
+        } else if (i < (group * 3) || i >= effect_num_leds - (group * 2)) {
             sethsv(HSV_RED, ledp);
-        } else if (i == 3) {
-            sethsv(HSV_YELLOW, ledp);
-        } else if (i == 15) {
-            sethsv(HSV_GREEN, ledp);
-        } else if (i == 14) {
-            sethsv(HSV_RED, ledp);
-        } else if (i == 13) {
+        } else if (i < (group * 4) || i >= effect_num_leds - (group * 3)) {
             sethsv(HSV_YELLOW, ledp);
         } else {
             sethsv(HSV_BLUE, ledp);
