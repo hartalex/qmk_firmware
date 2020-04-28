@@ -4,12 +4,13 @@ If you are new to unit testing, then you can find many good resources on interne
 
 Instead I recommend these two books, explaining two different styles of Unit Testing in detail.
 
-* "Test Driven Development: By Example: Kent Beck"
-* "Growing Object-Oriented Software, Guided By Tests: Steve Freeman, Nat Pryce"
+-   "Test Driven Development: By Example: Kent Beck"
+-   "Growing Object-Oriented Software, Guided By Tests: Steve Freeman, Nat Pryce"
 
 If you prefer videos there are Uncle Bob's [Clean Coders Videos](https://cleancoders.com/), which unfortunately cost quite a bit, especially if you want to watch many of them. But James Shore has a free [Let's Play](http://www.jamesshore.com/Blog/Lets-Play) video series.
 
 ## Google Test and Google Mock
+
 It's possible to Unit Test your code using [Google Test](https://github.com/google/googletest). The Google Test framework also includes another component for writing testing mocks and stubs, called "Google Mock". For information how to write the actual tests, please refer to the documentation on that site.
 
 ## Use of C++
@@ -27,9 +28,9 @@ If you want to unit test some feature, then take a look at the existing serial_l
 3. Include those files from the root folder `testlist.mk`and `build_test.mk` respectively.
 4. Add a new name for your testgroup to the `testlist.mk` file. Each group defined there will be a separate executable. And that's how you can support mocking out different parts. Note that it's worth adding some common prefix, just like it's done for the serial_link tests. The reason for that is that the make command allows substring filtering, so this way you can easily run a subset of the tests.
 5. Define the source files and required options in the `rules.mk` file.
-   * `_SRC` for source files
-   * `_DEFS` for additional defines
-   * `_INC` for additional include folders
+    - `_SRC` for source files
+    - `_DEFS` for additional defines
+    - `_INC` for additional include folders
 6. Write the tests in a new cpp file inside the test folder you created. That file has to be one of the files included from the `rules.mk` file.
 
 Note how there's several different tests, each mocking out a separate part. Also note that each of them only compiles the very minimum that's needed for the tests. It's recommend that you try to do the same. For a relevant video check out [Matt Hargett "Advanced Unit Testing in C & C++](https://www.youtube.com/watch?v=Wmy6g-aVgZI)
@@ -50,11 +51,12 @@ In that model you would emulate the input, and expect a certain output from the 
 
 # Tracing Variables :id=tracing-variables
 
-Sometimes you might wonder why a variable gets changed and where, and this can be quite tricky to track down without having a debugger. It's of course possible to manually add print statements to track it, but you can also enable the variable trace feature. This works for both for variables that are changed by the code, and when the variable is changed by some memory corruption.
+Sometimes you might wonder why a variable gets changed and where, and this can be quite tricky to track down without having a debugger. It's of course possible to manually add print statements to track it, but you can also enable the variable trace feature. This works for both variables that are changed by the code, and when the variable is changed by some memory corruption.
 
 To take the feature into use add `VARIABLE_TRACE=x` to the end of you make command. `x` represents the number of variables you want to trace, which is usually 1.
 
 Then at a suitable place in the code, call `ADD_TRACED_VARIABLE`, to begin the tracing. For example to trace all the layer changes, you can do this
+
 ```c
 void matrix_init_user(void) {
   ADD_TRACED_VARIABLE("layer", &layer_state, sizeof(layer_state));
