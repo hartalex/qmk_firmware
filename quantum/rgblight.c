@@ -1175,13 +1175,13 @@ void rgblight_effect_k1976(animation_status_t *anim) {
         LED_TYPE *ledp = led + i + effect_start_pos;
 
         if (i < (group * 2) || i >= effect_num_leds - group) {
-            sethsv(HSV_GREEN, ledp);
+            sethsv(HSV_CYAN, ledp);
         } else if (i < (group * 3) || i >= effect_num_leds - (group * 2)) {
             sethsv(HSV_RED, ledp);
         } else if (i < (group * 4) || i >= effect_num_leds - (group * 3)) {
-            sethsv(HSV_YELLOW, ledp);
+            sethsv(HSV_BROWN, ledp);
         } else {
-            sethsv(HSV_BLUE, ledp);
+            sethsv(HSV_BROWN, ledp);
         }
     }
     rgblight_set();
