@@ -54,6 +54,7 @@
 #define HSV_AZURE       132, 102, 255
 #define HSV_BLACK         0,   0,   0
 #define HSV_BLUE        170, 255, 255
+#define HSV_BROWN        15, 255, 255
 #define HSV_CHARTREUSE   64, 255, 255
 #define HSV_CORAL        11, 176, 255
 #define HSV_CYAN        128, 255, 255

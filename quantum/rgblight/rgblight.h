@@ -71,9 +71,9 @@
 |       40        | RGBLIGHT_MODE_TWINKLE + 3         |
 |       41        | RGBLIGHT_MODE_TWINKLE + 4         |
 |       42        | RGBLIGHT_MODE_TWINKLE + 5         |
+|       43        | RGBLIGHT_EFFECT_K1976             |
 |-----------------|-----------------------------------|
  *****/
-
 // clang-format off
 
 // check dynamic animation effects chose ?
@@ -85,7 +85,8 @@
   || defined(RGBLIGHT_EFFECT_CHRISTMAS)     \
   || defined(RGBLIGHT_EFFECT_RGB_TEST)      \
   || defined(RGBLIGHT_EFFECT_ALTERNATING)   \
-  || defined(RGBLIGHT_EFFECT_TWINKLE)
+  || defined(RGBLIGHT_EFFECT_TWINKLE)       \
+  || defined(RGBLIGHT_EFFECT_K1976)
 #    define RGBLIGHT_USE_TIMER
 #endif
 
@@ -453,6 +454,7 @@ void rgblight_effect_christmas(animation_status_t *anim);
 void rgblight_effect_rgbtest(animation_status_t *anim);
 void rgblight_effect_alternating(animation_status_t *anim);
 void rgblight_effect_twinkle(animation_status_t *anim);
+void rgblight_effect_k1976(animation_status_t *anim);
 
 #endif
 

@@ -1110,6 +1110,12 @@ void rgblight_timer_task(void) {
             effect_func   = (effect_func_t)rgblight_effect_twinkle;
         }
 #    endif
+#    ifdef RGBLIGHT_EFFECT_K1976
+        else if (rgblight_status.base_mode == RGBLIGHT_MODE_K1976) {
+            interval_time = 500;
+            effect_func   = (effect_func_t)rgblight_effect_k1976;
+        }
+#    endif
         if (animation_status.restart) {
             animation_status.restart    = false;
             animation_status.last_timer = sync_timer_read();
@@ -1163,7 +1169,6 @@ void rgblight_timer_task(void) {
     }
 #    endif
 }
-
 #endif /* RGBLIGHT_USE_TIMER */
 
 #if defined(RGBLIGHT_EFFECT_BREATHING) || defined(RGBLIGHT_EFFECT_TWINKLE)
@@ -1443,6 +1448,26 @@ void rgblight_effect_alternating(animation_status_t *anim) {
 }
 #endif
 
+#ifdef RGBLIGHT_EFFECT_K1976
+void rgblight_effect_k1976(animation_status_t *anim) {
+    int group = rgblight_ranges.effect_num_leds / 2 / 8;
+    for (int i = 0; i < rgblight_ranges.effect_num_leds; i++) {
+        rgb_led_t *ledp = led + i + rgblight_ranges.effect_start_pos;
+
+        if (i < (group * 2) || i >= rgblight_ranges.effect_num_leds - group) {
+            sethsv(HSV_CYAN, ledp);
+        } else if (i < (group * 3) || i >= rgblight_ranges.effect_num_leds - (group * 2)) {
+            sethsv(HSV_RED, ledp);
+        } else if (i < (group * 4) || i >= rgblight_ranges.effect_num_leds - (group * 3)) {
+            sethsv(HSV_BROWN, ledp);
+        } else {
+            sethsv(HSV_BROWN, ledp);
+        }
+    }
+    rgblight_set();
+}
+#endif
+
 #ifdef RGBLIGHT_EFFECT_TWINKLE
 __attribute__((weak)) const uint8_t RGBLED_TWINKLE_INTERVALS[] PROGMEM = {30, 15, 5};
 
@@ -1473,7 +1498,7 @@ void rgblight_effect_twinkle(animation_status_t *anim) {
 
     for (uint8_t i = 0; i < rgblight_ranges.effect_num_leds; i++) {
         TwinkleState *t = &(led_twinkle_state[i]);
-        HSV *         c = &(t->hsv);
+        HSV          *c = &(t->hsv);
 
         if (!random_color) {
             c->h = rgblight_config.hue;
